@@ -10,7 +10,7 @@ This block updates your system, installs Python, tools, Node.js, Yarn, and start
 ```Bash
 sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wget screen git lsof
 ```
-# Install Node.js v20.x
+# Install Node.js v20
 ```Bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt update && sudo apt install -y nodejs
 ```
@@ -61,6 +61,18 @@ sudo dpkg -i cloudflared-linux-amd64.deb
 ```Bash
 cloudflared tunnel --url http://localhost:3000
 ```
+Choose customised model's
+```
+ Gensyn/Qwen2.5-0.5B-Instruct
+
+ Qwen/Qwen3-0.6B
+
+ nvidia/AceInstruct-1.5B
+
+ dnotitia/Smoothie-Qwen3-1.7B
+
+ Gensyn/Qwen2.5-1.5B-Instruct
+ ```
 ACTION REQUIRED: Copy the resulting public URL from the tunnel command and log in to the Gensyn dashboard. Once logged in, go back to the original gensyn screen session to complete the configuration prompts (Hugging Face, Model Name, AI Market).
 
 Block 4: Install GSwarm and Go (For role)
@@ -87,3 +99,20 @@ source ~/.bashrc
 go install github.com/Deep-Commit/gswarm/cmd/gswarm@latest
 ```
 ACTION REQUIRED: After running this block, run the gswarm command to configure your Telegram token and Chat ID.
+
+RAM Issue
+Add swap memory:
+```Bash
+sudo fallocate -l 8G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+```
+
+Pull the latest release
+```
+git switch main
+git reset --hard
+git clean -fd
+git pull origin main
+```
